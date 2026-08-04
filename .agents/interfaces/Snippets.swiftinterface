@@ -1,0 +1,873 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.4 (swiftlang-6.4.0.25.4 clang-2100.3.25.1)
+// swift-module-flags: -target arm64-apple-macos12.0 -enable-objc-interop -language-mode 6 -O -enable-experimental-feature DebugDescriptionMacro -module-name Snippets -package-name swift_snippets
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.4
+import Dependencies
+import Foundation
+import KeyPathsExtensions
+import Swift
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+extension Snippets::SnippetRepresentableLiteral {
+  public static func const(_ value: Snippets::Snippets.Snippets::Const<Self>) -> Self
+}
+extension Snippets::Snippets.Snippets::Const {
+  @inlinable public init(_ other: Snippets::Snippets.Snippets::Const<Output>) {
+		self = other
+	}
+}
+extension Snippets::Snippets.Snippets::Const where Output : Snippets::SnippetRepresentableString {
+  @inlinable public static var newline: Snippets::Snippets.Snippets::Const<Output> {
+    get {
+		return .newlines(1)
+	}
+  }
+  @inlinable public static func newlines(_ count: Swift::Int) -> Snippets::Snippets.Snippets::Const<Output> {
+		.repeating("\n", count: count)
+	}
+  @inlinable public static var whitespace: Snippets::Snippets.Snippets::Const<Output> {
+    get {
+		return .whitespaces(1)
+	}
+  }
+  @inlinable public static func whitespaces(_ count: Swift::Int) -> Snippets::Snippets.Snippets::Const<Output> {
+		.repeating(" ", count: count)
+	}
+  @inlinable public static var tab: Snippets::Snippets.Snippets::Const<Output> {
+    get {
+		return .tabs(1)
+	}
+  }
+  @inlinable public static func tabs(_ count: Swift::Int) -> Snippets::Snippets.Snippets::Const<Output> {
+		.repeating("\t", count: count)
+	}
+  @inlinable public static var quote: Snippets::Snippets.Snippets::Const<Output> {
+    get {
+		return .quotes(1)
+	}
+  }
+  @inlinable public static func quotes(_ count: Swift::Int) -> Snippets::Snippets.Snippets::Const<Output> {
+		.repeating("\"", count: count)
+	}
+  @inlinable public static var backtick: Snippets::Snippets.Snippets::Const<Output> {
+    get {
+		return .backticks(1)
+	}
+  }
+  @inlinable public static func backticks(_ count: Swift::Int) -> Snippets::Snippets.Snippets::Const<Output> {
+		.repeating("`", count: count)
+	}
+  @inlinable public static var colon: Snippets::Snippets.Snippets::Const<Output> {
+    get {
+		return .colons(1)
+	}
+  }
+  @inlinable public static func colons(_ count: Swift::Int) -> Snippets::Snippets.Snippets::Const<Output> {
+		.repeating(":", count: count)
+	}
+  @inlinable public static var dot: Snippets::Snippets.Snippets::Const<Output> {
+    get {
+		return .dots(1)
+	}
+  }
+  @inlinable public static func dots(_ count: Swift::Int) -> Snippets::Snippets.Snippets::Const<Output> {
+		.repeating(".", count: count)
+	}
+  @inlinable public static var comma: Snippets::Snippets.Snippets::Const<Output> {
+    get {
+		return .commas(1)
+	}
+  }
+  @inlinable public static func commas(_ count: Swift::Int) -> Snippets::Snippets.Snippets::Const<Output> {
+		.repeating(",", count: count)
+	}
+  @inlinable public static var leftBracket: Snippets::Snippets.Snippets::Const<Output> {
+    get {
+		return .init(snippetLiteral: "[")
+	}
+  }
+  @inlinable public static var rightBracket: Snippets::Snippets.Snippets::Const<Output> {
+    get {
+		return .init(snippetLiteral: "]")
+	}
+  }
+  @inlinable public static var leftBrace: Snippets::Snippets.Snippets::Const<Output> {
+    get {
+		return .init(snippetLiteral: "{")
+	}
+  }
+  @inlinable public static var rightBrace: Snippets::Snippets.Snippets::Const<Output> {
+    get {
+		return .init(snippetLiteral: "}")
+	}
+  }
+  @inlinable public static var leftParenthesis: Snippets::Snippets.Snippets::Const<Output> {
+    get {
+		return .init(snippetLiteral: "(")
+	}
+  }
+  @inlinable public static var rightParenthesis: Snippets::Snippets.Snippets::Const<Output> {
+    get {
+		return .init(snippetLiteral: ")")
+	}
+  }
+  @inlinable public static var lessThan: Snippets::Snippets.Snippets::Const<Output> {
+    get {
+		return .init(snippetLiteral: "<")
+	}
+  }
+  @inlinable public static var greaterThan: Snippets::Snippets.Snippets::Const<Output> {
+    get {
+		return .init(snippetLiteral: ">")
+	}
+  }
+  @inlinable public static var equal: Snippets::Snippets.Snippets::Const<Output> {
+    get {
+		return .equals(count: 1)
+	}
+  }
+  @inlinable public static func equals(count: Swift::Int = 2) -> Snippets::Snippets.Snippets::Const<Output> {
+		return .repeating("=", count: count)
+	}
+}
+extension Swift::Array : Snippets::SnippetRepresentable where Element : Snippets::SnippetRepresentableLiteral {
+  public struct SnippetRepresentation : Snippets::SnippetExpressibleByLiteral, Snippets::_StaticSnippetOutputCollector {
+    @usableFromInline
+    internal let literal: [Element.SnippetRepresentation]
+    public init(snippetLiteral: [Element])
+    @inlinable public init() {
+			self.init(snippetLiteral: [])
+		}
+    @inlinable public func render() -> [Element] { literal.map { $0.render() } }
+    @inlinable public static func _collect(_ elements: [Swift::Array<Element>.Snippets::SnippetRepresentation.Snippets::Output]) -> [Element] {
+			.init(elements.joined(separator: environment(\.separator).render()))
+		}
+    public typealias Content = Swift::Never.Snippets::SnippetRepresentation
+    public typealias Output = [Element]
+    public typealias SnippetLiteralType = [Element]
+    public typealias SnippetRepresentation = Swift::Array<Element>.Snippets::SnippetRepresentation
+  }
+}
+extension Swift::Array : Snippets::SnippetRepresentableLiteral where Element : Snippets::SnippetRepresentableLiteral {
+}
+extension Foundation::Data : Snippets::SnippetRepresentableLiteral {
+  public struct SnippetRepresentation : Snippets::SnippetExpressibleByLiteral, Snippets::_StaticSnippetOutputCollector {
+    @usableFromInline
+    internal let literal: Foundation::Data
+    public init(snippetLiteral: Foundation::Data)
+    @inlinable public init() {
+			self.init(snippetLiteral: .init())
+		}
+    @inlinable public func render() -> Foundation::Data { literal }
+    @inlinable public static func _collect(_ elements: [Foundation::Data.Snippets::SnippetRepresentation.Snippets::Output]) -> Foundation::Data {
+			.init(elements.joined(separator: environment(\.separator).render()))
+		}
+    @available(macOS 10.10, iOS 8.0, tvOS 9.0, watchOS 2.0, *)
+    public typealias Content = Swift::Never.Snippets::SnippetRepresentation
+    @available(macOS 10.10, iOS 8.0, tvOS 9.0, watchOS 2.0, *)
+    public typealias Output = Foundation::Data
+    @available(macOS 10.10, iOS 8.0, tvOS 9.0, watchOS 2.0, *)
+    public typealias SnippetLiteralType = Foundation::Data
+    @available(macOS 10.10, iOS 8.0, tvOS 9.0, watchOS 2.0, *)
+    public typealias SnippetRepresentation = Foundation::Data.Snippets::SnippetRepresentation
+  }
+}
+extension Swift::Optional : Snippets::SnippetRepresentable where Wrapped : Snippets::SnippetRepresentableLiteral {
+  public struct SnippetRepresentation : Snippets::SnippetExpressibleByLiteral, Snippets::_StaticSnippetOutputCollector {
+    @usableFromInline
+    internal let literal: Wrapped.SnippetRepresentation?
+    public init(snippetLiteral: Wrapped?)
+    @inlinable public init() {
+			self.init(snippetLiteral: nil)
+		}
+    @inlinable public func render() -> Wrapped? { literal?.render() }
+    @inlinable public static func _collect(_ elements: [Swift::Optional<Wrapped>.Snippets::SnippetRepresentation.Snippets::Output]) -> Wrapped? {
+			Wrapped.SnippetRepresentation._collect(elements.compactMap { $0 })
+		}
+    public typealias Content = Swift::Never.Snippets::SnippetRepresentation
+    public typealias Output = Wrapped?
+    public typealias SnippetLiteralType = Wrapped?
+    public typealias SnippetRepresentation = Swift::Optional<Wrapped>.Snippets::SnippetRepresentation
+  }
+}
+extension Swift::Optional : Snippets::SnippetRepresentableLiteral where Wrapped : Snippets::SnippetRepresentableLiteral {
+}
+extension Swift::String : Snippets::SnippetRepresentableString {
+  public struct SnippetRepresentation : Snippets::SnippetExpressibleByLiteral, Snippets::_StaticSnippetOutputCollector {
+    @usableFromInline
+    internal let literal: Swift::String
+    public init(snippetLiteral: Swift::String)
+    @inlinable public init() {
+			self.init(snippetLiteral: "")
+		}
+    @inlinable public func render() -> Swift::String { literal }
+    @inlinable public static func _collect(_ elements: [Swift::String.Snippets::SnippetRepresentation.Snippets::Output]) -> Swift::String.Snippets::SnippetRepresentation.Snippets::Output {
+			elements.joined(separator: environment(\.separator).render())
+		}
+    public typealias Content = Swift::Never.Snippets::SnippetRepresentation
+    public typealias Output = Swift::String
+    public typealias SnippetLiteralType = Swift::String
+    public typealias SnippetRepresentation = Swift::String.Snippets::SnippetRepresentation
+  }
+}
+extension Swift::Substring : Snippets::SnippetRepresentableString {
+  public struct SnippetRepresentation : Snippets::SnippetExpressibleByLiteral, Snippets::_StaticSnippetOutputCollector {
+    @usableFromInline
+    internal let literal: Swift::Substring
+    public init(snippetLiteral: Swift::Substring)
+    @inlinable public init() {
+			self.init(snippetLiteral: "")
+		}
+    @inlinable public func render() -> Swift::Substring { literal }
+    @inlinable public static func _collect(_ elements: [Swift::Substring.Snippets::SnippetRepresentation.Snippets::Output]) -> Swift::Substring {
+			.init(elements.joined(separator: environment(\.separator).render()))
+		}
+    public typealias Content = Swift::Never.Snippets::SnippetRepresentation
+    public typealias Output = Swift::Substring
+    public typealias SnippetLiteralType = Swift::Substring
+    public typealias SnippetRepresentation = Swift::Substring.Snippets::SnippetRepresentation
+  }
+}
+extension Snippets::SnippetEnvironmentValues {
+  public var collectPreprocessor: @Sendable ([Output]) -> [Output] {
+    get
+  }
+  public var nonprocessingOutputCollector: @Sendable ([Output]) -> Output {
+    get
+  }
+  public var outputCollector: @Sendable ([Output]) -> Output {
+    get
+  }
+}
+extension Snippets::Snippet {
+  public func withNextOutputPreprocessor(_ preprocessor: @escaping @Sendable ([Self.Output]) -> [Self.Output], perform operation: () throws -> Self.Output) rethrows -> Self.Output
+  public func withOutputCollector(fileID: Swift::StaticString = #fileID, filePath: Swift::StaticString = #filePath, line: Swift::UInt = #line, column: Swift::UInt = #column, perform operation: (@Sendable ([Self.Output]) -> Self.Output) throws -> Self.Output) rethrows -> Self.Output
+}
+extension Snippets::SnippetEnvironmentValues {
+  public var emptySeparator: some Snippets::Snippet<Output> {
+    get
+  }
+  public var separator: some Snippets::Snippet<Output> {
+    get
+  }
+}
+public protocol SnippetEnvironmentKey<Output, Value> : Dependencies::DependencyKey {
+  associatedtype Output : Snippets::SnippetRepresentableLiteral
+  static var defaultValue: Self.Value { get }
+}
+extension Snippets::SnippetEnvironmentKey {
+  public static var liveValue: Self.Value {
+    get
+  }
+  public static var testValue: Self.Value {
+    get
+  }
+  public static var previewValue: Self.Value {
+    get
+  }
+}
+extension Snippets::Snippet {
+  @inlinable public static func environment(fileID: Swift::StaticString = #fileID, filePath: Swift::StaticString = #filePath, line: Swift::UInt = #line, column: Swift::UInt = #column) -> Snippets::SnippetEnvironmentValues<Self.Output> {
+		SnippetEnvironmentValues(
+			fileID: fileID,
+			filePath: filePath,
+			line: line,
+			column: column
+		)
+	}
+  @inlinable public static func environment<Value>(_ keyPath: Swift::KeyPath<Snippets::SnippetEnvironmentValues<Self.Output>, Value>, fileID: Swift::StaticString = #fileID, filePath: Swift::StaticString = #filePath, line: Swift::UInt = #line, column: Swift::UInt = #column) -> Value {
+		environment()[keyPath: keyPath]
+	}
+}
+public struct SnippetEnvironmentValues<Output> : Swift::Sendable where Output : Snippets::SnippetRepresentableLiteral {
+  @usableFromInline
+  internal let fileID: Swift::StaticString
+  @usableFromInline
+  internal let filePath: Swift::StaticString
+  @usableFromInline
+  internal let line: Swift::UInt
+  @usableFromInline
+  internal let column: Swift::UInt
+  @usableFromInline
+  internal init(fileID: Swift::StaticString = #fileID, filePath: Swift::StaticString = #filePath, line: Swift::UInt = #line, column: Swift::UInt = #column)
+  public func dependency<Value>(_ keyPath: Swift::KeyPath<Dependencies::DependencyValues, Value>) -> Value
+}
+extension Snippets::SnippetExpressibleByLiteral where Self.Output : Swift::ExpressibleByStringLiteral {
+  public typealias StringLiteralType = Self.Output.StringLiteralType
+  public typealias UnicodeScalarLiteralType = Self.Output.UnicodeScalarLiteralType
+  public typealias ExtendedGraphemeClusterLiteralType = Self.Output.ExtendedGraphemeClusterLiteralType
+  public init(stringLiteral value: Self.Output.StringLiteralType)
+  public init(unicodeScalarLiteral value: Self.Output.UnicodeScalarLiteralType)
+  public init(extendedGraphemeClusterLiteral value: Self.Output.ExtendedGraphemeClusterLiteralType)
+}
+public protocol SnippetExpressibleByLiteral<SnippetLiteralType> : Snippets::Snippet {
+  associatedtype SnippetLiteralType where Self.Output == Self.SnippetLiteralType
+  init(snippetLiteral: Self.SnippetLiteralType)
+  @inlinable init()
+}
+extension Snippets::SnippetExpressibleByLiteral where Self.Output : Swift::StringProtocol {
+  public init(_ snippet: some Snippet<String>)
+}
+@usableFromInline
+internal func uncheckedSendableAction<Input, Output>(_ action: @escaping (Input) -> Output) -> @Sendable (Input) -> Output
+public protocol Snippet<Output> : Snippets::SnippetRepresentable, Swift::Sendable where Self == Self.SnippetRepresentation {
+  associatedtype Output : Snippets::SnippetRepresentableLiteral
+  associatedtype Content : Snippets::Snippet
+  func render() -> Self.Output
+  @Snippets::SnippetBuilder<Self.Output> var content: Self.Content { get }
+}
+extension Snippets::Snippet {
+  public func makeSnippet() -> Self.SnippetRepresentation
+}
+extension Snippets::Snippet where Self.Output == Self.Content.Output {
+  @inlinable @_optimize(none) public func render() -> Self.Output {
+		self.content.render()
+	}
+}
+extension Snippets::Snippet where Self.Content == Swift::Never.Snippets::SnippetRepresentation {
+  @_transparent public var content: Swift::Never.Snippets::SnippetRepresentation {
+    @_transparent get {
+		._fatalError("'\(Self.self)' has no body.")
+	}
+  }
+}
+extension Swift::Never : Snippets::SnippetRepresentableLiteral {
+  public struct SnippetRepresentation : Snippets::SnippetExpressibleByLiteral, Snippets::_StaticSnippetOutputCollector {
+    public init(snippetLiteral: Swift::Never)
+    public init()
+    public var content: some Snippets::Snippet {
+      get
+    }
+    @_transparent public func render() -> Swift::Never {
+			fatalError("Unreachable")
+		}
+    @_transparent public func makeSnippet() -> Swift::Never.Snippets::SnippetRepresentation {
+			fatalError("Unreachable")
+		}
+    @_transparent public static func _fatalError(_ message: Swift::String) -> Swift::Never.Snippets::SnippetRepresentation {
+			fatalError(message)
+		}
+    public static func _collect(_ elements: [Swift::Never.Snippets::SnippetRepresentation.Snippets::Output]) -> Swift::Never.Snippets::SnippetRepresentation.Snippets::Output
+    public typealias Content = @_opaqueReturnTypeOf("$ss5NeverO8SnippetsE21SnippetRepresentationV7contentQrvp", 0) __
+    public typealias Output = Swift::Never
+    public typealias SnippetLiteralType = Swift::Never
+    public typealias SnippetRepresentation = Swift::Never.Snippets::SnippetRepresentation
+  }
+}
+@_functionBuilder public enum SnippetBuilder<Output> where Output : Snippets::SnippetRepresentableLiteral {
+  @inlinable public static func buildBlock() -> some Snippets::Snippet<Output> {
+		Output.SnippetRepresentation()
+	}
+  
+  @inlinable public static func buildPartialBlock<Component>(first: Component) -> some Snippets::Snippet<Output> where Output == Component.Output, Component : Snippets::Snippet {
+		first
+	}
+  
+  @inlinable public static func buildPartialBlock<Accumulated, Next>(accumulated: Accumulated, next: Next) -> some Snippets::Snippet<Output> where Output == Accumulated.Output, Accumulated : Snippets::Snippet, Next : Snippets::Snippet, Accumulated.Output == Next.Output {
+		_Sequence(accumulated, next)
+	}
+  
+  @inlinable public static func buildEither<S0, S1>(first component: S0) -> Snippets::SnippetBuilder<Output>.Snippets::_Conditional<S0, S1> where Output == S0.Output, S0 : Snippets::Snippet, S1 : Snippets::Snippet, S0.Output == S1.Output {
+		.first(component)
+	}
+  @inlinable public static func buildEither<S0, S1>(second component: S1) -> Snippets::SnippetBuilder<Output>.Snippets::_Conditional<S0, S1> where Output == S0.Output, S0 : Snippets::Snippet, S1 : Snippets::Snippet, S0.Output == S1.Output {
+		.second(component)
+	}
+  @inlinable public static func buildIf<Content>(_ content: Content?) -> Content? where Output == Content.Output, Content : Snippets::Snippet {
+		content
+	}
+  @inlinable public static func buildOptional<Component>(_ component: Component?) -> some Snippets::Snippet<Output> where Output == Component.Output, Component : Snippets::Snippet {
+		_Optional(component)
+	}
+  
+  @inlinable public static func buildArray<Component>(_ components: [Component]) -> some Snippets::Snippet<Output> where Output == Component.Output, Component : Snippets::Snippet {
+		_SequenceMany(components)
+	}
+  
+  @inlinable public static func buildExpression(_ component: any Snippets::Snippet<Output>) -> some Snippets::Snippet<Output> {
+		AnySnippet(component)
+	}
+  
+  @inlinable public static func buildExpression<Component>(_ component: Component?) -> some Snippets::Snippet<Output> where Output == Component.Output, Component : Snippets::Snippet {
+		_Optional(component)
+	}
+  
+  @inlinable public static func buildExpression(_ expression: Output) -> some Snippets::Snippet<Output> {
+		expression.makeSnippet()
+	}
+  
+  @inlinable public static func buildExpression(_ expression: some Snippet<Output>) -> some Snippets::Snippet<Output> {
+		expression
+	}
+  
+  @inlinable public static func buildExpression(_ expression: [some Snippet<Output>]) -> some Snippets::Snippet<Output> {
+		buildArray(expression)
+	}
+  
+  @inlinable public static func buildExpression<S>(_ expression: [Output.SnippetRepresentation]) -> some Snippets::Snippet<Output> where Output == S.SnippetRepresentation.Output, S : Snippets::SnippetRepresentable {
+		buildArray(expression)
+	}
+  
+  @inlinable public static func buildExpression<S>(_ expression: S) -> some Snippets::Snippet<Output> where Output == S.SnippetRepresentation.Output, S : Snippets::SnippetRepresentable {
+		expression.makeSnippet()
+	}
+  
+  @inlinable public static func buildFinalResult<Component>(_ component: Component) -> some Snippets::Snippet<Output> where Output == Component.Output, Component : Snippets::Snippet {
+		component
+	}
+  
+  public enum _Conditional<First, Second> : Snippets::Snippet where Output == First.Output, First : Snippets::Snippet, Second : Snippets::Snippet, First.Output == Second.Output {
+    case first(First)
+    case second(Second)
+    @inlinable public func render() -> Output {
+			switch self {
+			case let .first(first):
+				return first.render()
+
+			case let .second(second):
+				return second.render()
+			}
+		}
+    public typealias Content = Swift::Never.Snippets::SnippetRepresentation
+    public typealias Output = Output
+    public typealias SnippetRepresentation = Snippets::SnippetBuilder<Output>.Snippets::_Conditional<First, Second>
+  }
+  public enum _Optional<Contents> : Snippets::Snippet where Output == Contents.Output, Contents : Snippets::Snippet {
+    case some(Contents)
+    case none
+    public init(_ content: Contents?)
+    @inlinable public func render() -> Output {
+			switch self {
+			case let .some(contents):
+				return contents.render()
+
+			case .none:
+				return Snippets.Const.empty.render()
+			}
+		}
+    public typealias Content = Swift::Never.Snippets::SnippetRepresentation
+    public typealias Output = Output
+    public typealias SnippetRepresentation = Snippets::SnippetBuilder<Output>.Snippets::_Optional<Contents>
+  }
+  public struct _Sequence<A, B> : Snippets::Snippet where Output == A.Output, A : Snippets::Snippet, B : Snippets::Snippet, A.Output == B.Output {
+    @usableFromInline
+    internal let a: A
+    @usableFromInline
+    internal let b: B
+    public init(_ a: A, _ b: B)
+    @inlinable public func render() -> Output {
+			withOutputCollector { collect in
+				collect(renderOutputs(for: self))
+			}
+		}
+    public typealias Content = Swift::Never.Snippets::SnippetRepresentation
+    public typealias Output = Output
+    public typealias SnippetRepresentation = Snippets::SnippetBuilder<Output>.Snippets::_Sequence<A, B>
+  }
+  public struct _SequenceMany<Element> : Snippets::Snippet where Output == Element.Output, Element : Snippets::Snippet {
+    @usableFromInline
+    internal let elements: [Element]
+    public init(_ elements: [Element])
+    @inlinable public func render() -> Output {
+			withOutputCollector { collect in
+				collect(renderOutputs(for: self))
+			}
+		}
+    public typealias Content = Swift::Never.Snippets::SnippetRepresentation
+    public typealias Output = Output
+    public typealias SnippetRepresentation = Snippets::SnippetBuilder<Output>.Snippets::_SequenceMany<Element>
+  }
+}
+@usableFromInline
+internal func renderOutputs<Output>(for snippet: some Snippet<Output>) -> [Output]
+public struct AnySnippet<Output> : Snippets::Snippet where Output : Snippets::SnippetRepresentableLiteral {
+  @usableFromInline
+  internal let underlying: any Snippets::Snippet<Output>
+  public init(_ underlying: any Snippets::Snippet<Output>)
+  @inlinable public init(@Snippets::SnippetBuilder<Output> content: () -> some Snippet<Output>) {
+		self.init(content())
+	}
+  @_disfavoredOverload public init<R>(_ representable: R) where Output == R.SnippetRepresentation.Output, R : Snippets::SnippetRepresentable
+  @inlinable public func render() -> Output {
+		underlying.render()
+	}
+  public typealias Content = Swift::Never.Snippets::SnippetRepresentation
+  public typealias SnippetRepresentation = Snippets::AnySnippet<Output>
+}
+extension Snippets::Snippet {
+  @inlinable public func eraseToAnySnippet() -> Snippets::AnySnippet<Self.Output> {
+		AnySnippet(self)
+	}
+}
+extension Snippets::Snippets {
+  public struct Append<Output, Source, Contents> : Snippets::Snippet where Output == Source.Output, Source : Snippets::Snippet, Contents : Snippets::Snippet, Source.Output == Contents.Output {
+    @usableFromInline
+    internal let source: Source
+    @usableFromInline
+    internal let contents: Contents
+    public init(to source: Source, @Snippets::SnippetBuilder<Output> content: () -> Contents)
+    public func render() -> Output
+    public typealias Content = Swift::Never.Snippets::SnippetRepresentation
+    public typealias SnippetRepresentation = Snippets::Snippets.Snippets::Append<Output, Source, Contents>
+  }
+}
+extension Snippets::Snippet {
+  @inlinable public func withPrefix(_ prefix: some Snippet<Output>) -> some Snippets::Snippet<Self.Output> {
+		Snippets.Append(to: prefix) { self }
+	}
+  
+  @inlinable public func withSuffix(_ suffix: some Snippet<Output>) -> some Snippets::Snippet<Self.Output> {
+		Snippets.Append(to: self) { suffix }
+	}
+  
+}
+extension Snippets::SnippetExpressibleByLiteral {
+  @inlinable public func prefixed(with prefix: Self) -> Self {
+		.init(snippetLiteral: Snippets.Append(to: prefix) { self }.render())
+	}
+  @inlinable public func suffixed(with suffix: Self) -> Self {
+		.init(snippetLiteral: Snippets.Append(to: self) { suffix }.render())
+	}
+}
+extension Snippets::Snippets {
+  public struct Bracket<Output, Target> : Snippets::Snippet where Output == Target.Output, Target : Snippets::Snippet {
+    public struct Brackets : Swift::Sendable {
+      @usableFromInline
+      internal let leading: Snippets::Snippets.Snippets::Const<Output>
+      @usableFromInline
+      internal let trailing: Snippets::Snippets.Snippets::Const<Output>
+      public init(leading: Snippets::Snippets.Snippets::Const<Output>, trailing: Snippets::Snippets.Snippets::Const<Output>)
+      public init(_ bracket: Snippets::Snippets.Snippets::Const<Output>)
+    }
+    @usableFromInline
+    internal let target: Target
+    @usableFromInline
+    internal let brackets: Snippets::Snippets.Snippets::Bracket<Output, Target>.Snippets::Brackets
+    public init(in brackets: Snippets::Snippets.Snippets::Bracket<Output, Target>.Snippets::Brackets, @Snippets::SnippetBuilder<Output> target: () -> Target)
+    public init(_ target: Target, in brackets: Snippets::Snippets.Snippets::Bracket<Output, Target>.Snippets::Brackets)
+    @inlinable public var content: some Snippets::Snippet<Output> {
+      get {
+			Join {
+				brackets.leading
+				target
+				brackets.trailing
+			}
+		}
+    }
+    public typealias Content = @_opaqueReturnTypeOf("$s8SnippetsAAO7BracketV7contentQrvp", 0) __<Output, Target>
+    public typealias SnippetRepresentation = Snippets::Snippets.Snippets::Bracket<Output, Target>
+  }
+}
+extension Snippets::Snippets.Snippets::Bracket.Snippets::Brackets {
+  public func withInner(_ brackets: Snippets::Snippets.Snippets::Bracket<Output, Target>.Snippets::Brackets) -> Snippets::Snippets.Snippets::Bracket<Output, Target>.Snippets::Brackets
+  public func withOuter(_ brackets: Snippets::Snippets.Snippets::Bracket<Output, Target>.Snippets::Brackets) -> Snippets::Snippets.Snippets::Bracket<Output, Target>.Snippets::Brackets
+}
+extension Snippets::Snippets.Snippets::Bracket.Snippets::Brackets where Output : Snippets::SnippetRepresentableString {
+  @inlinable public static func backticks(_ count: Swift::Int = 1) -> Snippets::Snippets.Snippets::Bracket<Output, Target>.Snippets::Brackets {
+		.init(.backticks(count))
+	}
+  @inlinable public static func quotes(_ count: Swift::Int = 1) -> Snippets::Snippets.Snippets::Bracket<Output, Target>.Snippets::Brackets {
+		.init(.quotes(count))
+	}
+  @inlinable public static var brackets: Snippets::Snippets.Snippets::Bracket<Output, Target>.Snippets::Brackets {
+    get {
+		return .init(
+			leading: .leftBracket,
+			trailing: .rightBracket
+		)
+	}
+  }
+  @inlinable public static var braces: Snippets::Snippets.Snippets::Bracket<Output, Target>.Snippets::Brackets {
+    get {
+		return .init(
+			leading: .leftBrace,
+			trailing: .rightBrace
+		)
+	}
+  }
+  @inlinable public static var parenthesis: Snippets::Snippets.Snippets::Bracket<Output, Target>.Snippets::Brackets {
+    get {
+		return .init(
+			leading: .leftParenthesis,
+			trailing: .rightParenthesis
+		)
+	}
+  }
+  @inlinable public static var diamond: Snippets::Snippets.Snippets::Bracket<Output, Target>.Snippets::Brackets {
+    get {
+		return .init(
+			leading: .lessThan,
+			trailing: .greaterThan
+		)
+	}
+  }
+  @inlinable public static var newlines: Snippets::Snippets.Snippets::Bracket<Output, Target>.Snippets::Brackets {
+    get {
+		return .init(
+			leading: .newline,
+			trailing: .newline
+		)
+	}
+  }
+}
+extension Snippets::Snippets {
+  public struct Const<Output> : Snippets::SnippetExpressibleByLiteral where Output : Snippets::SnippetRepresentableLiteral {
+    @usableFromInline
+    internal let literal: Output.SnippetRepresentation
+    public init(_ literal: Output.SnippetRepresentation)
+    @inlinable public init(_ snippetLiteral: Output) {
+			self.literal = snippetLiteral.makeSnippet()
+		}
+    @inlinable public init(snippetLiteral: Output) {
+			self.init(snippetLiteral)
+		}
+    @inlinable public init() {
+			self.init(Output.SnippetRepresentation().render())
+		}
+    @inlinable public func render() -> Output { literal.render() }
+    public static func repeating(_ output: Output, count: Swift::Int) -> Snippets::Snippets.Snippets::Const<Output>
+    public static func repeating(_ literal: Snippets::Snippets.Snippets::Const<Output>, count: Swift::Int) -> Snippets::Snippets.Snippets::Const<Output>
+    public typealias Content = Swift::Never.Snippets::SnippetRepresentation
+    public typealias SnippetLiteralType = Output
+    public typealias SnippetRepresentation = Snippets::Snippets.Snippets::Const<Output>
+  }
+}
+extension Snippets::Snippets.Snippets::Const {
+  @inlinable public static var empty: Snippets::Snippets.Snippets::Const<Output> {
+    get { .init() }
+  }
+}
+extension Snippets::Snippets.Snippets::Const : Swift::ExpressibleByStringLiteral, Swift::ExpressibleByUnicodeScalarLiteral, Swift::ExpressibleByExtendedGraphemeClusterLiteral where Output : Swift::ExpressibleByStringLiteral {
+}
+extension Snippets::Snippets.Snippets::Const : Swift::Encodable where Output : Swift::Encodable {
+  public func encode(to encoder: any Swift::Encoder) throws
+}
+extension Snippets::Snippets.Snippets::Const : Swift::Decodable where Output : Swift::Decodable {
+  public init(from decoder: any Swift::Decoder) throws
+}
+extension Snippets::Snippets {
+  public struct ForEach<Output, Element, ElementSnippet> : Snippets::Snippet where Output == ElementSnippet.Output, Element : Swift::Sendable, ElementSnippet : Snippets::Snippet {
+    @usableFromInline
+    internal let elements: [ElementSnippet]
+    public init<S>(_ sequence: S, @Snippets::SnippetBuilder<Output> content: (Element) -> ElementSnippet) where Element == S.Element, S : Swift::Sequence
+    @inlinable public var content: some Snippets::Snippet<Output> {
+      get {
+			elements
+		}
+    }
+    public typealias Content = @_opaqueReturnTypeOf("$s8SnippetsAAO7ForEachV7contentQrvp", 0) __<Output, Element, ElementSnippet>
+    public typealias SnippetRepresentation = Snippets::Snippets.Snippets::ForEach<Output, Element, ElementSnippet>
+  }
+}
+extension Snippets::Snippets {
+  public struct Group<Output, Contents> : Snippets::Snippet where Output == Contents.Output, Contents : Snippets::Snippet {
+    @usableFromInline
+    internal let contents: Contents
+    public init(@Snippets::SnippetBuilder<Output> content: () -> Contents)
+    public var content: some Snippets::Snippet<Output> {
+      get
+    }
+    public typealias Content = @_opaqueReturnTypeOf("$s8SnippetsAAO5GroupV7contentQrvp", 0) __<Output, Contents>
+    public typealias SnippetRepresentation = Snippets::Snippets.Snippets::Group<Output, Contents>
+  }
+}
+extension Snippets::Snippets {
+  public struct Inline<Output> : Snippets::Snippet where Output : Snippets::SnippetRepresentableLiteral {
+    @usableFromInline
+    internal let output: @Sendable () -> Output
+    public init(render: @escaping @Sendable () -> Output)
+    @inlinable public func render() -> Output { output() }
+    public typealias Content = Swift::Never.Snippets::SnippetRepresentation
+    public typealias SnippetRepresentation = Snippets::Snippets.Snippets::Inline<Output>
+  }
+}
+extension Snippets::Snippets {
+  public struct Join<Output, Separator, Contents> : Snippets::Snippet where Output == Separator.Output, Separator : Snippets::Snippet, Contents : Snippets::Snippet, Separator.Output == Contents.Output {
+    @usableFromInline
+    internal let separator: Separator
+    @usableFromInline
+    internal let contents: Contents
+    public init(_ separator: Separator, @Snippets::SnippetBuilder<Output> content: () -> Contents)
+    public func render() -> Output
+    public typealias Content = Swift::Never.Snippets::SnippetRepresentation
+    public typealias SnippetRepresentation = Snippets::Snippets.Snippets::Join<Output, Separator, Contents>
+  }
+}
+extension Snippets::Snippets.Snippets::Join where Separator == Output.SnippetRepresentation {
+  @inlinable public init(_ separator: Output, @Snippets::SnippetBuilder<Output> content: () -> Contents) {
+		self.init(
+			separator.makeSnippet(),
+			content: content
+		)
+	}
+  @_disfavoredOverload @inlinable public init(_ separator: Separator = .init(), @Snippets::SnippetBuilder<Output> content: () -> Contents) {
+		self.init(
+			separator,
+			content: content
+		)
+	}
+}
+extension Snippets::Snippets {
+  public struct Map<Output, Input> : Snippets::Snippet where Output : Snippets::SnippetRepresentableLiteral, Input : Snippets::Snippet {
+    @usableFromInline
+    internal let input: Input
+    @usableFromInline
+    internal let transform: @Sendable (Input.Output) -> Output
+    public init(_ input: Input, transform: @escaping @Sendable (Input.Output) -> Output)
+    @inlinable public init(@Snippets::SnippetBuilder<Input.Output> input: () -> Input, transform: @escaping @Sendable (Input.Output) -> Output) {
+			self.init(
+				input(),
+				transform: transform
+			)
+		}
+    @inlinable public func render() -> Output {
+			transform(input.render())
+		}
+    public typealias Content = Swift::Never.Snippets::SnippetRepresentation
+    public typealias SnippetRepresentation = Snippets::Snippets.Snippets::Map<Output, Input>
+  }
+}
+extension Snippets::Snippet {
+  @inlinable public func map<T>(_ transform: @escaping @Sendable (Self.Output) -> T) -> some Snippets::Snippet<T> where T : Snippets::SnippetRepresentableLiteral {
+		Snippets.Map(self, transform: transform)
+	}
+  
+}
+extension Snippets::Snippets {
+  public struct FlatMap<Output, Result, Input> : Snippets::Snippet where Output == Result.Output, Result : Snippets::Snippet, Input : Snippets::Snippet {
+    @usableFromInline
+    internal let input: Input
+    @usableFromInline
+    internal let transform: @Sendable (Input.Output) -> Result
+    public init(_ input: Input, @Snippets::SnippetBuilder<Output> transform: @escaping @Sendable (Input.Output) -> Result)
+    @inlinable public init(@Snippets::SnippetBuilder<Input.Output> input: () -> Input, @Snippets::SnippetBuilder<Output> transform: @escaping @Sendable (Input.Output) -> Result) {
+			self.init(
+				input(),
+				transform: transform
+			)
+		}
+    @inlinable public func render() -> Output {
+			transform(input.render()).render()
+		}
+    public typealias Content = Swift::Never.Snippets::SnippetRepresentation
+    public typealias SnippetRepresentation = Snippets::Snippets.Snippets::FlatMap<Output, Result, Input>
+  }
+}
+extension Snippets::Snippet {
+  @inlinable public func flatMap<T>(@Snippets::SnippetBuilder<T.Output> _ transform: @escaping @Sendable (Self.Output) -> T) -> some Snippets::Snippet<T.Output> where T : Snippets::Snippet {
+		Snippets.FlatMap(self, transform: transform)
+	}
+  
+}
+extension Snippets::Snippets {
+  public struct SkipEmpty<Output, Contents> : Snippets::Snippet where Output : Swift::Collection, Output == Contents.Output, Contents : Snippets::Snippet {
+    @usableFromInline
+    internal let contents: Contents
+    public init(_ contents: Contents)
+    public init(@Snippets::SnippetBuilder<Output> content: () -> Contents)
+    @inlinable public func render() -> Output {
+			withNextOutputPreprocessor(
+				uncheckedSendableAction { $0.filter { !$0.isEmpty } }
+			) {
+				contents.render()
+			}
+		}
+    public typealias Content = Swift::Never.Snippets::SnippetRepresentation
+    public typealias SnippetRepresentation = Snippets::Snippets.Snippets::SkipEmpty<Output, Contents>
+  }
+}
+extension Snippets::Snippets.Snippets::SkipEmpty : Snippets::SnippetExpressibleByLiteral where Contents == Output.SnippetRepresentation {
+  public init(snippetLiteral: Output)
+  public init()
+  public typealias SnippetLiteralType = Output
+}
+extension Snippets::Snippet where Self.Output : Swift::Collection {
+  @inlinable public func skipEmpty() -> some Snippets::Snippet<Self.Output> {
+		Snippets.SkipEmpty(self)
+	}
+  
+}
+extension Snippets::Snippets {
+  public struct UnsafeSendable<Output> : Snippets::SnippetExpressibleByLiteral where Output : Snippets::SnippetRepresentableLiteral {
+    @usableFromInline
+    internal let underlying: Snippets::Snippets.Snippets::UnsafeSendable<Output>.Snippets::Underlying
+    public init(_ literal: Output)
+    @inlinable public init(snippetLiteral: Output) {
+			self.init(snippetLiteral)
+		}
+    @inlinable public init() {
+			self.init(snippetLiteral: Output.SnippetRepresentation().render())
+		}
+    public init(render: @escaping () -> Output)
+    @inlinable public func render() -> Output { underlying.render() }
+    @usableFromInline
+    internal enum Underlying : Snippets::Snippet {
+      case const(Snippets::Snippets.Snippets::UnsafeSendable<Output>.Snippets::Const)
+      case inline(Snippets::Snippets.Snippets::UnsafeSendable<Output>.Snippets::Inline)
+      @usableFromInline
+      internal func render() -> Output
+      @usableFromInline
+      internal typealias Content = Swift::Never.Snippets::SnippetRepresentation
+      @usableFromInline
+      internal typealias SnippetRepresentation = Snippets::Snippets.Snippets::UnsafeSendable<Output>.Snippets::Underlying
+    }
+    @usableFromInline
+    internal struct Const : Snippets::SnippetExpressibleByLiteral {
+      @usableFromInline
+      nonisolated(unsafe) internal let output: Output
+      @usableFromInline
+      internal init(snippetLiteral: Output)
+      @usableFromInline
+      internal init()
+      @usableFromInline
+      internal func render() -> Output
+      @usableFromInline
+      internal typealias Content = Swift::Never.Snippets::SnippetRepresentation
+      @usableFromInline
+      internal typealias SnippetLiteralType = Output
+      @usableFromInline
+      internal typealias SnippetRepresentation = Snippets::Snippets.Snippets::UnsafeSendable<Output>.Snippets::Const
+    }
+    @usableFromInline
+    internal struct Inline : Snippets::Snippet {
+      @usableFromInline
+      nonisolated(unsafe) internal let output: () -> Output
+      @usableFromInline
+      internal init(render: @escaping () -> Output)
+      @usableFromInline
+      internal func render() -> Output
+      @usableFromInline
+      internal typealias Content = Swift::Never.Snippets::SnippetRepresentation
+      @usableFromInline
+      internal typealias SnippetRepresentation = Snippets::Snippets.Snippets::UnsafeSendable<Output>.Snippets::Inline
+    }
+    public typealias Content = Swift::Never.Snippets::SnippetRepresentation
+    public typealias SnippetLiteralType = Output
+    public typealias SnippetRepresentation = Snippets::Snippets.Snippets::UnsafeSendable<Output>
+  }
+}
+public protocol SnippetRepresentable<SnippetRepresentation> {
+  associatedtype SnippetRepresentation : Snippets::Snippet
+  func makeSnippet() -> Self.SnippetRepresentation
+}
+extension Snippets::SnippetRepresentable where Self : Snippets::SnippetRepresentableLiteral {
+  public func makeSnippet() -> Self.SnippetRepresentation
+}
+public protocol _StaticSnippetOutputCollector<Output> : Snippets::Snippet {
+  static func _collect(_ elements: [Self.Output]) -> Self.Output
+}
+public protocol SnippetRepresentableLiteral : Snippets::SnippetRepresentable where Self == Self.SnippetRepresentation.Output, Self.SnippetRepresentation : Snippets::SnippetExpressibleByLiteral, Self.SnippetRepresentation : Snippets::_StaticSnippetOutputCollector {
+}
+public protocol SnippetRepresentableString : Snippets::SnippetRepresentableLiteral, Swift::StringProtocol {
+}
+extension Snippets::SnippetRepresentable {
+  @inlinable public static func snippet(@Snippets::SnippetBuilder<Self> content: () -> some Snippet<Self>) -> Self {
+		return .snippet(content())
+	}
+  @inlinable public static func snippet(_ snippet: some Snippet<Self>) -> Self {
+		snippet.render()
+	}
+}
+public enum Snippets {
+}
