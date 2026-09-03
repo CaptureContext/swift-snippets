@@ -24,15 +24,15 @@ let package = Package(
 		),
 		.package(
 			url: "https://github.com/pointfreeco/swift-custom-dump.git",
-			.upToNextMajor(from: "1.5.0")
+			.upToNextMajor(from: "1.7.3")
 		),
 		.package(
 			url: "https://github.com/pointfreeco/swift-dependencies.git",
-			.upToNextMajor(from: "1.12.0")
+			.upToNextMajor(from: "1.17.1")
 		),
 		.package(
-			url: "https://github.com/pointfreeco/xctest-dynamic-overlay.git",
-			.upToNextMajor(from: "1.9.0")
+			url: "https://github.com/pointfreeco/swift-issue-reporting.git",
+			.upToNextMajor(from: "2.1.0")
 		),
 	],
 	targets: [
@@ -55,7 +55,7 @@ let package = Package(
 				.target(name: "Snippets"),
 				.product(
 					name: "IssueReportingTestSupport",
-					package: "xctest-dynamic-overlay"
+					package: "swift-issue-reporting"
 				),
 				.product(
 					name: "CustomDump",
