@@ -47,4 +47,15 @@ jobs:
         import subprocess
         for result in Path.home().joinpath(".derivedData", "Debug", "Logs", "Test").glob("*.xcresult"):
             subprocess.run(["xcrun", "xcresulttool", "get", "test-results", "summary", "--path", str(result)], check=False)
+            subprocess.run(["xcrun", "xcresulttool", "export", "diagnostics", "--path", str(result), "--output-path", str(result.with_suffix(".diagnostics"))], check=False)
         PYTHON
+
+    - name: Upload test diagnostics
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-diagnostics-${{ matrix.platform }}
+        path: |
+          ~/.derivedData/Debug/Logs/Test
+          ~/Library/Logs/DiagnosticReports
+        retention-days: 3
