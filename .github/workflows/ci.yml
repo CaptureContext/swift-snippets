@@ -23,6 +23,7 @@ jobs:
     env:
       ENABLE_ALL_TRAITS: 1
     strategy:
+      fail-fast: false
       matrix:
         platform: [iOS, macOS]
         xcode: ['26.2']
@@ -37,3 +38,13 @@ jobs:
         action: xcodebuild-test
         platform: ${{ matrix.platform }}
         scheme: SnippetsTests
+
+    - name: Report test failures
+      if: failure()
+      run: |
+        python3 - <<'PYTHON'
+        from pathlib import Path
+        import subprocess
+        for result in Path.home().joinpath(".derivedData", "Debug", "Logs", "Test").glob("*.xcresult"):
+            subprocess.run(["xcrun", "xcresulttool", "get", "test-results", "summary", "--path", str(result)], check=False)
+        PYTHON
