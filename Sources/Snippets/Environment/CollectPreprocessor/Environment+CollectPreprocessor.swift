@@ -4,9 +4,14 @@ extension DependencyValues {
 	private enum SnippetCollectPreprocessorKey<
 		Output: SnippetRepresentableLiteral
 	>: SnippetEnvironmentKey {
-		typealias Value = @Sendable ([Output]) -> [Output]
+		// A nominal value avoids Swift 6.2's crashing associated-type lookup for
+		// a generic closure-valued dependency key.
+		struct Value: Sendable {
+			let transform: @Sendable ([Output]) -> [Output]
+		}
+
 		static var defaultValue: Value {
-			uncheckedSendableAction { $0 }
+			Value(transform: uncheckedSendableAction { $0 })
 		}
 	}
 
@@ -28,8 +33,8 @@ extension DependencyValues {
 	public subscript<Output: SnippetRepresentableLiteral>(
 		snippetCollectPreprocessorOf _: SnippetCollectPreprocessorKeyID<Output>
 	) -> @Sendable ([Output]) -> [Output] {
-		get { self[SnippetCollectPreprocessorKey<Output>.self] }
-		set { self[SnippetCollectPreprocessorKey<Output>.self] = newValue }
+		get { self[SnippetCollectPreprocessorKey<Output>.self].transform }
+		set { self[SnippetCollectPreprocessorKey<Output>.self] = .init(transform: newValue) }
 	}
 }
 

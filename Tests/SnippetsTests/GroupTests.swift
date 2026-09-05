@@ -5,6 +5,12 @@ import Testing
 @Suite("Snippets.Group")
 struct GroupTests {
 	@Test
+	func readsGenericPreprocessorDependencyMetadata() {
+		let values = String.SnippetRepresentation.environment().collectPreprocessor(["first", "second"])
+		expectNoDifference(["first", "second"], values)
+	}
+
+	@Test
 	func rendersGroupedBuilderContents() async throws {
 		let snippet = Snippets.Group {
 			"a"
